@@ -1,2 +1,2 @@
-# Musi cWeb Application
-Web application for music streaming, playlist making and following your favorite artists.
+# Music Web Application
+Web application for music streaming, playlist making and following artists.
