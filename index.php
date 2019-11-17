@@ -12,9 +12,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hello to index page</title>
+	<title>Welcome to Slotify</title>
+	<link rel="stylesheet" type="text/css" href="Assets/css/style.css">
 </head>
 <body>
-<h2>Hellooo!</h2>
+
+	<div id="nowPlayingBarContainer">
+		
+	</div>
+
+
 </body>
 </html>
