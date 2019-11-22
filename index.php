@@ -22,7 +22,11 @@
 		<div id="topContainer">
 			
 			<div id="navBarContainer">
-				
+				<nav class="navBar">
+					<a href="index.php" class="logo">
+						<img src="Assets/Images/icons/doglogo.png">
+					</a>
+				</nav>
 			</div>
 
 		</div>

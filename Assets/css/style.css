@@ -159,3 +159,14 @@ html, body{
     top: 0;
     left: 0;
 }
+
+.navBar{
+	flex-direction: column;
+    padding: 25px;
+    display: flex;
+    -ms-flex-direction: column;
+}
+
+.logo img{
+	width: 32px;
+}
