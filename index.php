@@ -20,7 +20,24 @@
 	<div id="nowPlayingBarContainer">
 		<div id="nowPlayingBar">
 			<div id="nowPlayingLeft">
-				
+				<div class="content">
+					<span class="albumLink">
+						<img src="http://clipart-library.com/img/2008830.jpg" class="albumArtwork">
+					</span>	
+
+					<div class="trackInfo">
+
+						<span class="trackName">
+							<span>Happy Birthday</span>
+						</span>
+
+						<span class="artistName">
+							<span>Soha Ahmed</span>
+						</span>
+
+					</div>
+
+				</div>
 			</div>
 
 			<div id="nowPlayingCenter">
@@ -52,6 +69,20 @@
 						</button>
 
 					</div>
+
+					<div class="playbackBar">
+						
+						<span class="progressTime current">0.00</span>
+						<div class="progressBar">
+							<div class="progressBarBackground">
+								<div class="progress"></div>
+							</div>
+						</div>
+						<span class="progressTime remaining">0.00</span>
+
+					</div>
+
+
 				</div>
 				
 			</div>
