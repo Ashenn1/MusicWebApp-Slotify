@@ -2,6 +2,7 @@
 <?php
 	include("Includes/config.php");
 	include("Includes/classes/Artist.php");
+	include("Includes/classes/Album.php");
 
 	if(isset($_SESSION["userLoggedIn"]))
 	{

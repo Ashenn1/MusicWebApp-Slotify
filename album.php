@@ -8,14 +8,12 @@
 		header("Location: index.php ");
 	}
 
-	$albumQuery = mysqli_query($con , "SELECT * FROM album WHERE id = '$albumId'");
+	$album = new Album($con , $albumId); 
 
-	$album = mysqli_fetch_array($albumQuery);
-	$artistId = $album['artist'];
- 
-	$artist = new Artist($con , $artistId);
-
-	echo $artist->getName();
+	echo $album->getTitle();
+ 	
+ 	$artist = $album->getArtist();
+ 	echo $artist->getName();
 
  ?>
 
