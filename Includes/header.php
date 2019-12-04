@@ -1,6 +1,8 @@
 
 <?php
 	include("Includes/config.php");
+	include("Includes/classes/Artist.php");
+
 	if(isset($_SESSION["userLoggedIn"]))
 	{
 		$userLoggedIn = $_SESSION["userLoggedIn"];
