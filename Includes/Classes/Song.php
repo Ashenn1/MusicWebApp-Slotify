@@ -16,11 +16,11 @@
 			$this->con = $con;
 			$this->id = $id;
 
-			$songQuery =  mysqli_query($this->con , "SELECT * FROM song WHERE id = '$this->id'");
+			$songQuery =  mysqli_query($this->con , "SELECT * FROM songs WHERE id = '$this->id'");
 			$this->mysqliData = mysqli_fetch_array($songQuery);
 
 			$this->title = $this->mysqliData['title'];
-			$this->artistId = $this->mysqliData['aritst'];
+			$this->artistId = $this->mysqliData['artist'];
 			$this->albumId = $this->mysqliData['album'];
 			$this->genreId = $this->mysqliData['genre'];
 			$this->duration = $this->mysqliData['duration'];

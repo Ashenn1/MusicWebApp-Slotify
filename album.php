@@ -30,5 +30,45 @@
 
  </div>
 
+ <div class="trackListContainer">
+ 		
+ 		<ul class="trackList">
+ 			<?php
+ 				$songIdArray = $album->getSongIds();	
+ 				$rowCnt = 1;
+ 				foreach ($songIdArray as $songId) {
+ 					 
+ 					$albumSong = new Song($con , $songId);
+ 					$albumAritst = $albumSong->getArtist();
+
+ 					echo "<li class='trackListRow'> 
+
+ 							<div class='trackCount'>
+ 								<img class='pay' src='Assets/Images/icons/play-white.png'>
+ 								<span class='trackNumber'> $rowCnt </span>
+ 							</div>
+
+ 							<div class='trackInfo'>
+ 								<span class='trackName'>". $albumSong->getTitle()."</span>
+ 								<span class='artistName'>". $albumAritst->getName()."</span>
+ 							</div>
+
+ 							<div class='trackOptions'>
+ 								<img class='optionsBtn' src='Assets/Images/icons/more.png'>
+ 							</div>
+
+ 							<div class='trackDuration'>
+ 								<span class='duration'>".$albumSong->getDuration()."</span>
+ 							</div>
+
+ 						  </li>";
+
+ 					$rowCnt++;
+ 				}
+ 			?>
+ 		</ul>
+
+ </div>
+
 
 <?php include("Includes/footer.php"); ?>		
