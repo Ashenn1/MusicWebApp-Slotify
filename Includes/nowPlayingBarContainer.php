@@ -22,9 +22,31 @@
 
 	function setTrack(trackId , newPlaylist , play){
 
-		audioElement.setTrack("Assets/music/Imagine Dragons-Thunder.mp3");
+		$.post("Includes/Handlers/ajax/getSongJson.php" , {songId : trackId} , function(data){
+
+			var track = JSON.parse(data);
+
+			$(".trackName span").text(track.title);
+
+			$.post("Includes/Handlers/ajax/getArtistJson.php" , {ArtistId : track.artist} , function(data){
+				var artist = JSON.parse(data);
+				console.log(artist);
+				$(".artistName span").text(artist.name);
+			});
+
+			$.post("Includes/Handlers/ajax/getAlbumJson.php" , {AlbumId : track.album} , function(data){
+				var album = JSON.parse(data);
+				console.log(album);
+				$(".albumLink img").attr("src", album.artworkPath);
+			});
+
+			console.log(track);
+			audioElement.setTrack(track.path);
+			audioElement.play();
+		});
+
 		if(play){
-			audioElement.play();	
+			audioElement.play();	 
 		}
 	
 	}
@@ -50,17 +72,17 @@
 					<div id="nowPlayingLeft">
 						<div class="content">
 							<span class="albumLink">
-								<img src="http://clipart-library.com/img/2008830.jpg" class="albumArtwork">
+								<img src="" class="albumArtwork">
 							</span>	
 
 							<div class="trackInfo">
 
 								<span class="trackName">
-									<span>Happy Birthday</span>
+									<span></span>
 								</span>
 
 								<span class="artistName">
-									<span>Soha Ahmed</span>
+									<span></span>
 								</span>
 
 							</div>
