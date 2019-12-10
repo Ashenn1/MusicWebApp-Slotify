@@ -36,13 +36,13 @@
 
 			$.post("Includes/Handlers/ajax/getAlbumJson.php" , {AlbumId : track.album} , function(data){
 				var album = JSON.parse(data);
-				console.log(album);
+				console.log(album); 
 				$(".albumLink img").attr("src", album.artworkPath);
 			});
 
 			console.log(track);
-			audioElement.setTrack(track.path);
-			audioElement.play();
+			audioElement.setTrack(track);
+			playSong();
 		});
 
 		if(play){
@@ -52,6 +52,13 @@
 	}
 
 	function playSong(){
+
+		if(audioElement.audio.currentTime == 0){
+			$.post("Includes/Handlers/ajax/updatePlays.php" , { songId : audioElement.currentlyPlaying.id });
+			console.log(audioElement.currentlyPlaying.id);
+		}
+		
+
 		$(".controlButton.play").hide();
 		$(".controlButton.pause").show();
 		audioElement.play();
