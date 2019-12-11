@@ -42,7 +42,7 @@
 
 			console.log(track);
 			audioElement.setTrack(track);
-			playSong();
+			pauseSong();
 		});
 
 		if(play){
