@@ -18,6 +18,8 @@
 		currentPlaylist = <?php echo $jsonArray; ?>;
 		audioElement = new Audio();
 		setTrack(currentPlaylist[0] , currentPlaylist , false); 
+		updateVolumeProgressBar(audioElement.audio);
+
 
 		$(".playbackBar .progressBar").mousedown(function(){
 			mouseDown = true;
@@ -34,6 +36,25 @@
 
 		$(".playbackBar .progressBar").mouseup(function(e){
 			timeFromOffset(e,this);
+		});
+
+		$(".volumeBar .progressBar").mousedown(function(){
+			mouseDown = true;
+		});
+
+		$(".volumeBar .progressBar").mousemove(function(e){
+			if(mouseDown == true)
+			{
+				var percentage = e.offsetX / $(this).width();
+				if(percentage >= 0 && percentage <= 1)
+					audioElement.audio.volume = percentage;
+			}
+		});
+
+		$(".volumeBar .progressBar").mouseup(function(e){
+			var percentage = e.offsetX / $(this).width();
+			if(percentage >= 0 && percentage <= 1)
+				{audioElement.audio.volume = percentage;}
 		});
 
 		$(document).mouseup(function(){
