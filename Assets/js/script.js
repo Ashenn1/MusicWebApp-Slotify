@@ -1,6 +1,8 @@
 var currentPlaylist = new Array();
 var audioElement;
 var mouseDown = false;
+var currentIndex = 0;
+var repeat = false;
 
 function formatTime(seconds){
 	var time = Math.round(seconds);
@@ -32,7 +34,7 @@ function Audio(){
 		// 'this' refers to the object that the event was called on , which here is audio object.
 		var duration = formatTime(this.duration);
 		$(".progressTime.remaining").text(duration); // dont do this -->  this.audio.duration.
-		
+
 	});
 
 	this.audio.addEventListener("timeupdate" , function(){

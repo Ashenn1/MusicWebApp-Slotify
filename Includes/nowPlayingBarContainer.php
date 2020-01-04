@@ -21,6 +21,11 @@
 		updateVolumeProgressBar(audioElement.audio);
 
 
+		$("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove" , function(e){
+			e.preventDefault();
+		});
+
+
 		$(".playbackBar .progressBar").mousedown(function(){
 			mouseDown = true;
 		});
@@ -70,7 +75,35 @@
 		audioElement.setTime(seconds);
 	}
 
+
+	function nextSong(){
+
+		if(repeat == true)
+		{
+			audioElement.setTime(0);
+			playSong();
+			return;
+		}
+
+		if(currentIndex == currentPlaylist.length-1){
+			currentIndex=0;
+		}
+		else{
+			currentIndex++;
+		}
+		var trackToPlay = currentPlaylist[currentIndex];
+		setTrack(trackToPlay , currentPlaylist , true);
+	}
+
+	function setRepeat(){
+		repeat = !repeat;
+		var imageName = repeat ? "repeat-active.png" : "repeat.png";
+		$(".controlButton.repeat img").attr("src" , "Assets/Images/icons/" + imageName);
+	}
+
 	function setTrack(trackId , newPlaylist , play){
+
+		currentIndex = currentPlaylist.indexOf(trackId);
 
 		$.post("Includes/Handlers/ajax/getSongJson.php" , {songId : trackId} , function(data){
 
@@ -92,7 +125,7 @@
 
 			console.log(track);
 			audioElement.setTrack(track);
-			pauseSong();
+			playSong();
 		});
 
 		if(play){
@@ -167,11 +200,11 @@
 									<img src="Assets/Images/icons/pause.png" alt="Pause">
 								</button>
 
-								<button class="controlButton next" title="Next Button">
+								<button class="controlButton next" title="Next Button" onclick="nextSong()">
 									<img src="Assets/Images/icons/next.png" alt="Next">
 								</button>
 
-								<button class="controlButton repeat" title="Repeat Button">
+								<button class="controlButton repeat" title="Repeat Button" onclick="setRepeat()">
 									<img src="Assets/Images/icons/repeat.png" alt="Repeat">
 								</button>
 
