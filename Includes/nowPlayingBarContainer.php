@@ -15,9 +15,9 @@
 
 	//Will only execute when the page renders fully.
 	$(document).ready(function(){
-		currentPlaylist = <?php echo $jsonArray; ?>;
+		newPlaylist = <?php echo $jsonArray; ?>;
 		audioElement = new Audio();
-		setTrack(currentPlaylist[0] , currentPlaylist , false); 
+		setTrack(newPlaylist[0] , newPlaylist , false); 
 		updateVolumeProgressBar(audioElement.audio);
 
 
@@ -101,7 +101,7 @@
 		else{
 			currentIndex++;
 		}
-		var trackToPlay = currentPlaylist[currentIndex];
+		var trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
 		setTrack(trackToPlay , currentPlaylist , true);
 	}
 
@@ -117,9 +117,48 @@
 		$(".controlButton.volume img").attr("src" , "Assets/Images/icons/" + imageName);
 	}
 
+	function setShuffle(){
+		shuffle = !shuffle;
+		var imageName = shuffle ? "shuffle-active.png" : "shuffle.png";
+		$(".controlButton.shuffle img").attr("src" , "Assets/Images/icons/" + imageName);
+
+		if(shuffle){
+			//Randomize playlist
+			shuffleArray(shufflePlaylist);
+			currentIndex = shufflePlaylist.indexOf(audioElement.currentlyPlaying.id);
+		}
+		else{
+			//Shuffle has been deactivated
+			//Go back to regular playlist
+			currentIndex = currentPlaylist.indexOf(audioElement.currentlyPlaying.id);
+		}
+	}
+
+	function shuffleArray(playlist){
+		var randNum, tmp, i;
+
+		//Just swapping values around.
+		for(i=playlist.length; i; i--){
+			randNum = Math.floor(Math.random()*i);
+			tmp = playlist[i-1];
+			playlist[i-1] = playlist[randNum];
+			playlist[randNum] = tmp;
+		}
+	}
+
+
 	function setTrack(trackId , newPlaylist , play){
 
-		currentIndex = currentPlaylist.indexOf(trackId);
+		if(newPlaylist != currentPlaylist){
+			currentPlaylist = newPlaylist;
+			shufflePlaylist = currentPlaylist.slice(); // slice() to copy of the array not a reference.
+			shuffleArray(shufflePlaylist);
+		}
+
+		if(shuffle)
+			currentIndex = shufflePlaylist.indexOf(trackId);
+		else
+			currentIndex = currentPlaylist.indexOf(trackId);
 
 		$.post("Includes/Handlers/ajax/getSongJson.php" , {songId : trackId} , function(data){
 
@@ -200,7 +239,7 @@
 						<div class="content playerControls">
 
 							<div class="buttons"> 
-								<button class="controlButton shuffle" title="Shuffle Button">
+								<button class="controlButton shuffle" title="Shuffle Button" onclick="setShuffle()">
 									<img src="Assets/Images/icons/shuffle.png" alt="Shuffle">
 								</button>
 
