@@ -37,6 +37,11 @@ function Audio(){
 
 	});
 
+
+	this.audio.addEventListener("ended", function(){
+		nextSong();
+	});
+
 	this.audio.addEventListener("timeupdate" , function(){
 
 		if(this.duration){
