@@ -23,6 +23,12 @@ function openPage(url){
 
 }
 
+function playFirstSong(){
+
+	setTrack(tmpPlaylist[0] , tmpPlaylist , true);
+
+}
+
 function formatTime(seconds){
 	var time = Math.round(seconds);
 	var minutes = Math.floor(time / 60);
