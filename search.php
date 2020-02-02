@@ -41,7 +41,11 @@
 	        $this = $(this);
 	    $this.val("");
     });
+
 </script>
+
+
+<?php if($term == "") exit();?>
 
 
 <div class="trackListContainer borderBottom">
@@ -49,7 +53,7 @@
  		<ul class="trackList">
  			<?php
 
- 				$songsQuery = mysqli_query($con ,  "SELECT id FROM songs WHERE title LIKE '$term%' LIMIT 10");
+ 					$songsQuery = mysqli_query($con ,  "SELECT id FROM songs WHERE title LIKE '$term%' LIMIT 10");
 
  				if(mysqli_num_rows($songsQuery) == 0){
  					echo "<span class='noResults'>No songs found matching " . $term . "</span>";
@@ -104,7 +108,7 @@
 
  <div class="artistsContainer borderBottom">
 
- 	<h2>Artists</h2>
+ 	<h2>ARTISTS</h2>
 
  	<?php
 
@@ -131,3 +135,32 @@
  	?>
  	
  </div>
+
+
+ <div class="gridViewContainer">
+
+ 	<h2>ALBUMS</h2>
+	
+	<?php
+
+		$albumQuery = mysqli_query($con, "SELECT * FROM album WHERE title LIKE '$term%' LIMIT 10");
+
+		if(mysqli_num_rows($albumQuery) == 0)
+			echo "<span class='noResults'>No albums found matching " .$term. "</span>";
+
+		while($row = mysqli_fetch_array($albumQuery) ) {
+
+			echo "<div class='gridViewItem'>
+					<span role='link' tabindex='0' onclick='openPage(\"album.php?id=".$row['id']."\")' >
+					
+						<img src='" . $row['artworkPath'] . "'>
+
+						<div class='gridViewInfo'>"
+							. $row['title'] .
+						"</div>
+
+					</span>
+				</div>";
+
+		}
+	?>
