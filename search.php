@@ -22,17 +22,17 @@
 	
 	$(function(){
 
-		var timer;
-
 		//This code will wait 2 seconds after typing is finished and will execute.
 		$(".searchInput").keyup(function(){
 			clearTimeout(timer);
-
-			timer = setTimeout(function(){
+ 
+			timer = setTimeout(function(){ //sets a time out that goes off after 2 seconds.
+				console.log("here");
 				var val = $(".searchInput").val();
 				openPage("search.php?term=" + val);
 			} , 2000);
 		});
+
 	});
 
 
