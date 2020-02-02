@@ -11,6 +11,11 @@
 			$this->id = $id;
 		}
 
+
+		public function getId(){
+			return $this->id;
+		}
+
 		public function getName(){
 			$artistQuery =  mysqli_query($this->con , "SELECT name FROM artist WHERE id = '$this->id'");
 			$artist = mysqli_fetch_array($artistQuery);
