@@ -27,6 +27,28 @@ function openPage(url){
 
 }
 
+function createPlaylist(){
+	console.log(userLoggedIn);
+	var popup = prompt("Please enter the name of your playlist");
+
+	if(popup != null){
+		//INSERT IN QUERY.
+
+		$.post("Includes/Handlers/ajax/createPlaylist.php",{name:popup , username: userLoggedIn})
+		.done(function(error){
+
+			if(error != ""){
+				alert(error);
+				return;
+			}
+
+			//do something when ajax returns.
+			openPage("yourMusic.php"); //basically just a page refresh.
+		});
+	}
+
+}
+
 function playFirstSong(){
 
 	setTrack(tmpPlaylist[0] , tmpPlaylist , true);
