@@ -9,6 +9,19 @@ var shuffle = false;
 var userLoggedIn;
 var timer;
 
+$(document).click(function(click){
+	var target = $(click.target);
+
+	//if they are not clicking on the options or the menu itself then hide the menu
+	if(!target.hasClass("item") && !target.hasClass("optionsBtn")){
+		hideOptionsMenu();
+	}
+});
+
+$(window).scroll(function(){
+	hideOptionsMenu();
+});
+
 
 function openPage(url){
 
@@ -57,7 +70,7 @@ function deletePlaylist(playlistId){
 		$.post("Includes/Handlers/ajax/deletePlaylist.php",{ playlistId: playlistId })
 		.done(function(error){
 
-			if(error != ""){
+			if(error != ""){ 
 				alert(error);
 				return;
 			}
@@ -72,6 +85,36 @@ function deletePlaylist(playlistId){
 function playFirstSong(){
 
 	setTrack(tmpPlaylist[0] , tmpPlaylist , true);
+
+}
+
+
+function showOptionsMenu(button){
+
+	var menu = $(".optionsMenu");
+
+	var menuWidth = menu.width();
+
+	//takes the position from the top of the scrolled window aand how far were that is from
+	//the top of the document itself.
+	var scrollTop = $(window).scrollTop(); // distance from top of window to top of page/document
+	var elementOffset = $(button).offset().top; // distance from button to top of doc
+
+	var top = elementOffset - scrollTop;
+	var left = $(button).position().left; // how far from the left the position of the btn is.
+
+	menu.css({ "top": top + "px" , "left": left - menuWidth + "px" , "display": "inline" });
+
+
+}
+
+function hideOptionsMenu(){
+
+	var menu = $(".optionsMenu");
+
+	if(menu.css("dispaly") != "none"){
+		menu.css("display" , "none"); 
+	}
 
 }
 
