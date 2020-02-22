@@ -65,6 +65,24 @@ function openPage(url){
 
 }
 
+function removeFromPlaylist(button , playlistId){
+
+	var songId = $(button).prevAll(".songId").val();	
+
+	$.post("Includes/Handlers/ajax/removeFromPlaylist.php",{ playlistId: playlistId, songId:songId })
+	.done(function(error){
+
+		if(error != ""){ 
+			alert(error);
+			return;
+		}
+
+		//do something when ajax returns.
+		openPage("playlist.php?id=" + playlistId); //basically just a page refresh.
+	});
+
+}
+
 function createPlaylist(){
 	console.log(userLoggedIn);
 	var popup = prompt("Please enter the name of your playlist");
