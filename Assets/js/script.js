@@ -163,6 +163,35 @@ function hideOptionsMenu(){
 
 }
 
+function updateEmail(emailClass){
+
+	var emailValue = $("." + emailClass).val();
+
+	$.post("Includes/Handlers/ajax/updateEmail.php" , {email:emailValue , username: userLoggedIn})
+	.done(function(response){
+
+		$("." + emailClass).nextAll(".message").text(response);
+	});
+
+}
+
+function updatePassword(oldPasswordClass , newPasswordClass1 , newPasswordClass2){
+
+	var oldPassword = $("." + oldPasswordClass).val();
+	var newPassword1 = $("." + newPasswordClass1).val();
+	var newPassword2 = $("." + newPasswordClass2).val();
+
+
+	$.post("Includes/Handlers/ajax/updatePassword.php" , 
+		{oldPassword:oldPassword ,username: userLoggedIn, 
+			newPassword1: newPassword1 , newPassword2:newPassword2})
+	.done(function(response){
+
+		$("." + emailClass).nextAll(".message").text(response);
+	});
+
+}
+
 function logout(){
 
 	$.post("Includes/Handlers/ajax/logout.php" , function(){
