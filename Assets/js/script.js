@@ -22,6 +22,31 @@ $(window).scroll(function(){
 	hideOptionsMenu();
 });
 
+//when the select is changed, we are going to execute this function
+$(document).on("change" , "select.playlist" , function(){
+
+	var select = $(this);
+	var playlistId = select.val(); //this refers to the element which this event was fired on "select"
+	//prev -> to get the previous ancestor which is the input element.
+	var songId = select.prev(".songId").val();
+
+	//console.log("playlistId : " + playlistId);
+	//console.log("Song Id : " + songId);
+
+	$.post("Includes/Handlers/ajax/addToPlaylist.php" , {playlistId: playlistId , songId: songId})
+	.done(function(error){
+
+		if(error!=""){
+			alert(error);
+			return;
+		}
+
+		hideOptionsMenu();
+		$(select).val("");
+	});
+
+});
+
 
 function openPage(url){
 
@@ -91,9 +116,11 @@ function playFirstSong(){
 
 function showOptionsMenu(button){
 
+	var songId = $(button).prevAll(".songId").val();
 	var menu = $(".optionsMenu");
 
 	var menuWidth = menu.width();
+	menu.find(".songId").val(songId);
 
 	//takes the position from the top of the scrolled window aand how far were that is from
 	//the top of the document itself.
