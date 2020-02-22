@@ -79,9 +79,7 @@
 
  <nav class="optionsMenu"> 
  	<input type="hidden" class="songId">
- 	<?php echo Playlist::getPlaylistDropdown($con , $userLoggedIn->getusername()); ?> 
- 	<div class="item">item2</div>
- 	<div class="item">item3</div>
+ 	<?php echo Playlist::getPlaylistDropdown($con , $userLoggedIn->getusername()); ?>
 
  </nav>
 		
