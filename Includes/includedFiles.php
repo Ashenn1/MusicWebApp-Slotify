@@ -1,5 +1,6 @@
 <?php
-
+	
+	//To check if the page is requested with ajax or not.
 	if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
 		include("Includes/config.php");
 		include("Includes/classes/User.php");

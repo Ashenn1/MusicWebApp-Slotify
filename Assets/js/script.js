@@ -163,6 +163,14 @@ function hideOptionsMenu(){
 
 }
 
+function logout(){
+
+	$.post("Includes/Handlers/ajax/logout.php" , function(){
+		location.reload();
+	});
+
+}
+
 function formatTime(seconds){
 	var time = Math.round(seconds);
 	var minutes = Math.floor(time / 60);

@@ -488,5 +488,9 @@ input:focus{
 .optionsMenu select{
 	 border: none;
     -webkit-appearance: none;
-    -moz-apperance: none; 
+    -moz-apperance: none;  
+}
+
+.userInfo h1{
+	text-align: center;
 }
