@@ -187,7 +187,7 @@ function updatePassword(oldPasswordClass , newPasswordClass1 , newPasswordClass2
 			newPassword1: newPassword1 , newPassword2:newPassword2})
 	.done(function(response){
 
-		$("." + emailClass).nextAll(".message").text(response);
+		$("." + oldPasswordClass).nextAll(".message").text(response);
 	});
 
 }
